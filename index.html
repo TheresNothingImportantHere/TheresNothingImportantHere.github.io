@@ -1,0 +1,215 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <style>
+      
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      
+      .flex1 {
+        width: 100%;
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+      }
+      
+      .flex2 {
+        width: 100%;
+        margin: 0px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+      }
+      
+      ol {
+        position: relative;
+        top: -30px;
+      }
+      
+      .box {
+        width: 45%;
+        height: 100%;
+        margin: 10px;
+        border-radius: 5px;
+        background-color: #eee;
+        transition: all .3s;
+      }
+      
+      .box:hover {
+        background-color: #efefef;
+        box-shadow: 0px 5px 15px 2px #0003;
+      }
+      
+      .box:active {
+        background-color: #ddd;
+        box-shadow: 0px 5px 15px -2px inset #0003;
+      }
+      
+      .container {
+        width: 100%;
+        padding: 10px;
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-self: center;
+      }
+      
+      textarea,iframe,input[type="text"] {
+        border: 3px dotted black;
+        margin: 5px;
+        border-radius: 5px;
+        resize: both;
+      }
+      
+      input[type="text"] {
+      	width:15em;
+        height:2em;
+      }
+      
+      .ubuntu-mono-regular {
+        font-family: "Ubuntu Mono", monospace;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      .ubuntu-mono-bold {
+        font-family: "Ubuntu Mono", monospace;
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      .ubuntu-mono-regular-italic {
+        font-family: "Ubuntu Mono", monospace;
+        font-weight: 400;
+        font-style: italic;
+      }
+
+      .ubuntu-mono-bold-italic {
+        font-family: "Ubuntu Mono", monospace;
+        font-weight: 700;
+        font-style: italic;
+      }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  	<center>
+    <h2>Title:</h2>
+  	<input type="text" id="tit" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="htmlt" onkeyup="updateT()">
+    </center>
+    <!-- Row 1 -->
+    <div class="container">
+      <!-- First Box -->
+      <div class="box">
+        <!-- Image -->
+        <div class="flex1">
+          <textarea class="ubuntu-mono-regular" style="width:90%;height:200px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="htmlt" onkeyup="updateT()"></textarea>
+        </div>
+        <!-- Heading and List -->
+        <div class="flex2">
+          <h3>HTML</h3>
+        </div>
+      </div>
+      <!-- Second Box -->
+      <div class="box">
+        <!-- Image -->
+        <div class="flex1">
+          <textarea class="ubuntu-mono-regular" style="width:90%;height:200px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="csst" onkeyup="updateT()"></textarea>
+        </div>
+        <!-- Heading and List -->
+        <div class="flex2">
+          <h3>CSS</h3>
+        </div>
+      </div>
+    </div>
+    <!-- Row Two -->
+    <div class="container">
+      <!-- First Box -->
+      <div class="box">
+        <!-- Image -->
+        <div class="flex1">
+          <textarea class="ubuntu-mono-regular" style="width:90%;height:200px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="jst" onkeyup="updateT()"></textarea>
+        </div>
+        <!-- Heading and List -->
+        <div class="flex2">
+          <h3>Javascript</h3>
+        </div>
+      </div>
+      <!-- Second Box -->
+      <div class="box">
+        <!-- Image -->
+        <div class="flex1">
+          <textarea class="ubuntu-mono-regular" style="width:90%;height:200px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="ht" onkeyup="updateT()"></textarea>
+        </div>
+        <!-- Heading and List -->
+        <div class="flex2">
+          <h3>HTML: Head</h3>
+        </div>
+      </div>
+    </div>
+    <div class="flex2">
+    <h2>Result:</h2>
+    </div>
+    <div class="flex2">
+    <iframe width="85%" height="200" id="r"></iframe>
+    </div>
+    <div class="flex2">
+    <h2>Code:</h2>
+    </div>
+    <div class="flex2">
+    <div id="disp"></div>
+    </div>
+
+<script>
+
+function updateT() {
+  let htmlt = document.getElementById('htmlt').value;
+  let csst = document.getElementById('csst').value;
+  let jst = document.getElementById('jst').value;
+  let ht = document.getElementById("ht").value;
+  let tit = document.getElementById("tit").value;
+  
+  let code = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          ${csst}
+        </style>
+        <script>
+          ${jst}
+        <\/script>
+        ${ht}
+        <title>${tit}</title>
+      </head>
+      <body>
+        ${htmlt || ''}
+      </body>
+    </html>
+  `;
+  
+  let codeDisp = document.getElementById("disp");
+  codeDisp.innerText = code;
+  
+  const getBlobURL = (code, type) => {
+    const blob = new Blob([code], { type });
+    return URL.createObjectURL(blob);
+  }
+  
+  const url = getBlobURL(code, 'text/html');
+  
+  const iframe = document.querySelector('#r');
+  iframe.src = url;
+}
+
+
+</script>
+
+ </body>
+</html>

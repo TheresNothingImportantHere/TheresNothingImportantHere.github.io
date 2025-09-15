@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>OBJ ➜ Python (deduped)</title>
+<style>
+  body      {font-family:sans-serif;padding:20px;background:#f0f0f0}
+  textarea  {width:100%;height:220px;margin-top:10px;box-sizing:border-box}
+  pre       {width:100%;margin-top:10px;background:#fff;padding:10px;
+             border:1px solid #ccc;white-space:pre-wrap;box-sizing:border-box}
+  button    {margin-top:10px;padding:10px 20px;font-size:16px}
+</style>
+</head>
+<body>
+<h2>OBJ ➜ Python Converter (with merged vertices)</h2>
+
+<textarea id="objInput" placeholder="Paste OBJ content here…"></textarea>
+<button onclick="convertOBJ()">Convert</button>
+
+<h3>Python output</h3>
+<pre id="output"></pre>
+
+<script>
+function convertOBJ () {
+  const lines        = document.getElementById('objInput').value.split('\n');
+
+  const rawVerts     = [];          // [[x,y,z], …]  as they appear
+  const facesOrig    = [];          // [[old,old,old], …]
+
+  /* ── first pass ─────────────────────────────────────────── */
+  for (let line of lines) {
+    line = line.trim();
+    if (line.startsWith('v ')) {
+      const [,x,y,z] = line.split(/\s+/);
+      rawVerts.push([+x, +y, +z]);
+    } else if (line.startsWith('f ')) {
+      const idx = line.slice(2).trim().split(/\s+/).map(p =>
+          parseInt(p.split('/')[0],10)-1);              // OBJ is 1-based
+      if (idx.length === 3)        facesOrig.push(idx);
+      else if (idx.length === 4) { // quad ➜ 2 triangles
+        facesOrig.push([idx[0],idx[1],idx[2]],
+                       [idx[0],idx[2],idx[3]]);
+      }
+    }
+  }
+
+  /* ── second pass  :  build unique-vertex list ───────────── */
+  const keyToNew   = {};           // "x,y,z" => newIndex
+  const uniqueVerts= [];           // deduped list
+  const old2new    = {};           // oldIndex => newIndex
+
+  rawVerts.forEach((v,oldIdx) => {
+    const key = v.map(n => n.toFixed(6)).join(',');   // 1 µ precision
+    if (key in keyToNew) {
+      old2new[oldIdx] = keyToNew[key];
+    } else {
+      const newIdx = uniqueVerts.length;
+      keyToNew[key] = newIdx;
+      uniqueVerts.push(v);
+      old2new[oldIdx] = newIdx;
+    }
+  });
+
+  /* ── remap faces ────────────────────────────────────────── */
+  const faces = facesOrig.map(face => face.map(i => old2new[i]));
+
+  /* ── generate python text ───────────────────────────────── */
+  const vertLines = uniqueVerts.map(v => `(${v[0]}, ${-v[1]}, ${v[2]})`);
+  const faceLines = faces.map(f => `[${f[0]}, ${f[1]}, ${f[2]}]`);
+
+  const py =
+`verts = [
+  ${vertLines.join(',\n  ')}
+]
+
+triangles = [
+  ${faceLines.join(',\n  ')}
+]`;
+
+  document.getElementById('output').textContent = py;
+}
+</script>
+</body>
+</html>

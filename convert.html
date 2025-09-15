@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+</style>
+<script>
+function mapRange(value, inMin, inMax, outMin, outMax) {
+return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
+
+function calc() {
+let inmin = parseInt(document.querySelector("#inmin").value)
+let inmax = parseInt(document.querySelector("#inmax").value)
+let outmin = parseInt(document.querySelector("#outmin").value)
+let outmax = parseInt(document.querySelector("#outmax").value)
+let val = parseInt(document.querySelector("#val").value)
+let out = document.querySelector("#out")
+out.innerHTML = mapRange(val,inmin,inmax,outmin,outmax)
+}
+</script>
+
+<title></title>
+</head>
+<body>
+<input id="val">
+<br>
+Min:<input id="inmin">Max:<input id="inmax">
+<br>
+Min:<input id="outmin">Max:<input id="outmax">
+<br>
+<div id="out"></div>
+<br>
+<button onclick="calc()">Calc</button>
+</body>
+</html>

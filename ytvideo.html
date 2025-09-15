@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YouTube Viewer</title>
+  <style>
+    body {
+      padding: 10px;
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      transition: all 0.5s;
+    }
+    input, button {
+      margin: 5px;
+      padding: 8px;
+      font-size: 16px;
+      background-color:#eee;
+      transition: all 0.3s;
+      border-radius: 10px;
+      border: solid 5px #ddd;
+      color: #222;
+      place
+    }
+    input:hover, button:hover {
+      background-color:#ddd;
+    }
+    iframe {
+      border: none;
+      margin-top: 10px;
+    }
+    header {
+      border-radius: 15px;
+      border: 3px solid #eee;
+      color: #111;
+      padding: 15px;
+      background-color:#ddd;
+      font-size: 1.5rem;
+      font-family: Roboto;
+      width: 800px;
+      margin: 15px;
+    }
+    
+    code {
+      border: solid 2px #eee;
+      border-radius:5px;
+      transition:all 0.1s;
+      margin:5px;
+    }
+    
+    code:hover {
+      background-color:#eee;
+    }
+  </style>
+</head>
+<body>
+  <header>Enter the full YouTube URL (e.g., <code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code> or <code>https://youtube.com/shorts/dQw4w9WgXcQ</code>)</header>
+  <input type="text" id="url" placeholder="Paste YouTube URL" onkeydown="g(event)">
+  <button onclick="go()">Go</button>
+  <button onclick="theater()">Theater</button>
+
+  <iframe id="fr" width="892" height="502" src="https://www.youtube.com/embed/" title="YouTube Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  <script>
+    function g(e) {
+      if (e.key.toLowerCase() === "enter") {
+        go();
+      }
+    }
+
+    function go() {
+      const urlInput = document.querySelector("#url").value.trim();
+      const videoId = extractVideoId(urlInput);
+      const fr = document.querySelector("#fr");
+
+      if (videoId) {
+        fr.src = `https://www.youtube.com/embed/${videoId}`;
+        document.title = `YouTube: ${videoId}`;
+      } else {
+        alert("Invalid YouTube URL. Please try again.");
+      }
+    }
+
+    function extractVideoId(url) {
+      const match = url.match(/(?:watch\?v=|shorts\/|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+      return match ? match[1] : null;
+    }
+
+    function theater() {
+      const fr = document.querySelector("#fr");
+      fr.style.position = "fixed";
+      fr.style.top = "0";
+      fr.style.left = "0";
+      fr.style.width = "100vw";
+      fr.style.height = "100vh";
+      fr.style.zIndex = "9999";
+      fr.style.margin = "0";
+      fr.style.padding = "0";
+    }
+  </script>
+</body>
+</html>

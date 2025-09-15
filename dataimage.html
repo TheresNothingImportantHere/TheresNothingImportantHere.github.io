@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input {
+width:100%;
+font-size:14px;
+margin:0px;
+border:none;
+}
+body {
+padding:0px;
+margin:0px
+}
+</style>
+<script>
+function g() {
+let i = document.querySelector("#source")
+let img = document.querySelector("#image")
+img.src=i.value
+}
+</script>
+
+<title></title>
+</head>
+<body>
+<input id="source" placeholder="data link for image" onkeyup="g()"></input>
+<br>
+<img src="" id="image">
+</body>
+</html>
