@@ -51,6 +51,29 @@
         border: 3px solid #ebb;
         border-radius: 100%;
       }
+
+      .tooltip {
+        visibility: hidden; /* Hidden by default */
+        min-width: 130px;
+        background-color: black;
+        color: #ffffff;
+        text-align: center;
+        font-size: 0.5em;
+        padding: 5px 0;
+        border-radius: 6px;
+        position: relative;
+        left: 100%;
+        z-index: 999; /* Ensure tooltip is displayed above content */
+      }
+      .icon-r:hover .tooltip {
+        visibility: visible;
+      }
+      .icon-b:hover .tooltip {
+        visibility: visible;
+      }
+      .icon-f:hover .tooltip {
+        visibility: visible;
+      }
     </style>
   </head>
   <body>
@@ -121,6 +144,27 @@
             enterHandler(siteUrls[i])
           })
           itemcontainer.appendChild(item)
+        }
+        let iconr = document.getElementsByClassName('icon-r')
+        for (let j = 0; j < iconr.length; j++) {
+          let rtooltip = document.createElement('span')
+          rtooltip.innerHTML='This can only be opened as a regular url.'
+          rtooltip.classList.add('tooltip')
+          iconr[j].appendChild(rtooltip)
+        }
+        let iconb = document.getElementsByClassName('icon-b')
+        for (let j = 0; j < iconb.length; j++) {
+          let btooltip = document.createElement('span')
+          btooltip.innerHTML='This can only be opened in about:blank or a method.'
+          btooltip.classList.add('tooltip')
+          iconb[j].appendChild(btooltip)
+        }
+        let iconf = document.getElementsByClassName('icon-f')
+        for (let j = 0; j < iconf.length; j++) {
+          let ftooltip = document.createElement('span')
+          ftooltip.innerHTML='This can only be opened using a method.'
+          ftooltip.classList.add('tooltip')
+          iconf[j].appendChild(ftooltip)
         }
       }
 
