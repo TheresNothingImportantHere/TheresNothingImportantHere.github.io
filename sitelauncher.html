@@ -79,7 +79,8 @@
       let newWinChkbxObj = document.getElementById("new")
       let goBtnObj = document.getElementById("go")
       let url=''
-      let siteNames = ['12Wave <div class="icon-r"></div>','iammyguy21th\'s homepage <div class="icon-b"></div>']
+      let siteNames = ['12wave','iammyguy21th']
+      let siteDnames = ['12Wave <div class="icon-r"></div>','iammyguy21th\'s homepage <div class="icon-b"></div>']
       let siteUrls = ['https://12wave.com','https://iammyguy21th.github.io']
 
       goBtnObj.addEventListener("click", function() {
@@ -115,7 +116,7 @@
         for (let i = 0; i < siteUrls.length; i++) {
           let item = document.createElement('li')
           item.classList.add('listitem')
-          item.innerHTML=siteNames[i]
+          item.innerHTML=siteDnames[i]
           item.addEventListener("click", function() {
             enterHandler(siteUrls[i])
           })
