@@ -84,7 +84,7 @@
       let siteUrls = ['https://12wave.com','https://iammyguy21th.github.io']
 
       goBtnObj.addEventListener("click", function() {
-        enterHandler(siteUrls[siteNames.findIndex(found => found === nameInpObj.value)])
+        enterHandler(siteUrls[siteNames.findIndex(found => found.toLowerCase() === nameInpObj.value.toLowerCase())])
       })
 
       function enterHandler(url) {
