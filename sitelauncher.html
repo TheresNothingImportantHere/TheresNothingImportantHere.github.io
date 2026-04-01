@@ -20,6 +20,37 @@
         backdrop-filter: blur(10px) brightness(110%);
         background-color: #ddd;
       }
+
+      .icon-r {
+        background-color: #cfc;
+        display: inline-flex;
+        width: 0.7em;
+        height: 0.7em;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid #beb;
+        border-radius: 100%;
+      }
+      .icon-b {
+        background-color: #ffc;
+        display: inline-flex;
+        width: 0.7em;
+        height: 0.7em;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid #eeb;
+        border-radius: 100%;
+      }
+      .icon-f {
+        background-color: #fcc;
+        display: inline-flex;
+        width: 0.7em;
+        height: 0.7em;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid #ebb;
+        border-radius: 100%;
+      }
     </style>
   </head>
   <body>
@@ -48,8 +79,8 @@
       let newWinChkbxObj = document.getElementById("new")
       let goBtnObj = document.getElementById("go")
       let url=''
-      let siteNames = ['12Wave -r-','test2']
-      let siteUrls = ['https://12wave.com','https://example.org']
+      let siteNames = ['12Wave <div class="icon-r"></div>','iammyguy21th\'s homepage <div class="icon-b"></div>']
+      let siteUrls = ['https://12wave.com','https://iammyguy21th.github.io']
 
       goBtnObj.addEventListener("click", function() {
         enterHandler(siteUrls[siteNames.findIndex(found => found === nameInpObj.value)])
