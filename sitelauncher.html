@@ -58,11 +58,12 @@
         background-color: black;
         color: #ffffff;
         text-align: center;
-        font-size: 0.5em;
+        font-size: 0.9em;
         padding: 5px 0;
-        border-radius: 6px;
-        position: relative;
+        border-radius: 6px 6px 6px 0px;
+        position: absolute;
         left: 100%;
+        bottom: 50%;
         z-index: 999; /* Ensure tooltip is displayed above content */
       }
       .icon-r:hover .tooltip {
@@ -74,6 +75,10 @@
       .icon-f:hover .tooltip {
         visibility: visible;
       }
+      .icon-r, .icon-b, .icon-f {
+        position: relative;
+      }
+
     </style>
   </head>
   <body>
