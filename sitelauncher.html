@@ -99,9 +99,9 @@
       let newWinChkbxObj = document.getElementById("new")
       let goBtnObj = document.getElementById("go")
       let url=''
-      let siteNames = ['12wave','eagler2','dashmetry']
-      let siteDnames = ['12Wave: similar to doodle jump <div class="icon-r"></div>','eagler2: eaglercraft hosted on iammyguy21th\'s github <div class="icon-b"></div>','dashmetry: similar to geometry dash <div class="icon-f"></div>']
-      let siteUrls = ['https://12wave.com','https://iammyguy21th.github.io/eagler/eagler2','https://dashmetry.io']
+      let siteNames = ['12wave','eagler1.8','eagler1.12','dashmetry']
+      let siteDnames = ['12Wave: similar to doodle jump <div class="icon-r"></div>','eagler1.8: eaglercraft 1.8 hosted on iammyguy21th\'s github <div class="icon-b"></div>','eagler1.12: eaglercraft 1.12.2 hosted on iammyguy21th\'s github <div class="icon-b"></div>','dashmetry: similar to geometry dash <div class="icon-f"></div>']
+      let siteUrls = ['https://12wave.com','https://iammyguy21th.github.io/eagler/eagler1.8.html','https://iammyguy21th.github.io/eagler/eagler1.12.html','https://dashmetry.io']
 
       goBtnObj.addEventListener("click", function() {
         enterHandler(siteUrls[siteNames.findIndex(found => found.toLowerCase() === nameInpObj.value.toLowerCase())])
