@@ -23,33 +23,25 @@
 
       .icon-r {
         background-color: #cfc;
-        display: inline-flex;
-        width: 0.7em;
-        height: 0.7em;
-        align-items: center;
-        justify-content: center;
         border: 3px solid #beb;
-        border-radius: 100%;
       }
       .icon-b {
         background-color: #ffc;
-        display: inline-flex;
-        width: 0.7em;
-        height: 0.7em;
-        align-items: center;
-        justify-content: center;
         border: 3px solid #eeb;
-        border-radius: 100%;
       }
-      .icon-f {
+      .icon-f{
         background-color: #fcc;
+        border: 3px solid #ebb;
+      }
+      .icon-f, .icon-b, .icon-r {
         display: inline-flex;
         width: 0.7em;
         height: 0.7em;
         align-items: center;
         justify-content: center;
-        border: 3px solid #ebb;
         border-radius: 100%;
+        position: absolute;
+        bottom: 50%;
       }
 
       .tooltip {
@@ -75,10 +67,10 @@
       .icon-f:hover .tooltip {
         visibility: visible;
       }
-      .icon-r, .icon-b, .icon-f {
-        position: relative;
+      
+      li {
+      	position: relative;
       }
-
     </style>
   </head>
   <body>
