@@ -67,9 +67,9 @@
       .icon-f:hover .tooltip {
         visibility: visible;
       }
-      
+
       li {
-      	position: relative;
+        position: relative;
       }
     </style>
   </head>
@@ -130,6 +130,15 @@
         }
       }
 
+      async function copyText(text) {
+        try {
+          await navigator.clipboard.writeText(text)
+          alert('Text copied to clipboard')
+        } catch (err) {
+          alert(`Failed to copy: ${err}`)
+        }
+      }
+
 
       let itemcontainer = document.getElementById("itemcontainer")
       function fillItems() {
@@ -137,6 +146,7 @@
           let item = document.createElement('li')
           item.classList.add('listitem')
           item.innerHTML=siteDnames[i]
+          item.dataset.url = siteUrls[i]
           item.addEventListener("click", function() {
             enterHandler(siteUrls[i])
           })
@@ -161,6 +171,11 @@
           let ftooltip = document.createElement('span')
           ftooltip.innerHTML='This can only be opened using a method.'
           ftooltip.classList.add('tooltip')
+          iconf[j].addEventListener("click", function(event) {
+            event.stopPropagation() // prevent triggering the li click
+            let parentLi = this.closest("li")
+            copyText(parentLi.dataset.url)
+          })
           iconf[j].appendChild(ftooltip)
         }
       }
