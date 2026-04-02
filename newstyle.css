@@ -55,7 +55,7 @@ input[type="checkbox"] {
 
 input:hover {
   box-shadow: 0px 3px 10px 4px #0004;
-  transform: translate3d(0px,0px,50px);
+  transform: translate3d(0px,0px,5px);
   border-color: #bbb;
 }
 
@@ -81,6 +81,7 @@ select::selection {
 select:hover {
   box-shadow: 0px 3px 10px 4px #0004;
   border-color: #bbb;
+  transform: translate3d(0px,0px,5px);
 }
 
 button {
@@ -106,6 +107,7 @@ button {
 button:hover {
   box-shadow: 0px 3px 10px 4px #0004;
   border-color: #bbb;
+  transform: translate3d(0px,0px,5px);
 }
 
 button::selection {
@@ -131,6 +133,7 @@ button::selection {
 .card:hover {
   box-shadow: 0px 4px 18px 2px #0008;
   border: 5px solid #c0c0c0;
+  transform: translate3d(0px,0px,5px);
 }
 
 .centeredmax {
@@ -165,12 +168,18 @@ button::selection {
   border-color: #bbb;
   cursor: pointer;
   box-shadow: 0px 2px 10px 2px #0008;
+  transform: translate3d(0px,0px,5px);
 }
 
 .listitem:active {
   border-color: #ddd;
   cursor: pointer;
   box-shadow: 0px 2px 10px 2px #0008 inset;
+  transform: translate3d(0px,0px,-2px);
+}
+
+ol {
+  perspective: 300px;
 }
 
 .icon-r {
