@@ -1,5 +1,7 @@
 # TheresNothingImportantHere.github.io
 there's nothing important here
+## yo if you're not me just ignore this close this tab
+## I just use this for hosting files
 ## Note:
 - Some files are not mine
 - also some are just iframes i think
