@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File to Filesystem/Blob URL Converter</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #f5f5fa;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+  input, button, textarea {
+    margin: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 0.6rem;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #357ac9;
+  }
+  textarea {
+    width: 90%;
+    max-width: 600px;
+    height: 120px;
+  }
+</style>
+</head>
+<body>
+<h1>File Link Converter</h1>
+<p>Enter your local <code>file:///</code> link below, and choose what to generate:</p>
+
+<input id="fileLink" type="text" size="80" placeholder="file:///home/.../Downloads/entered%20site%20(1).html">
+<br>
+<button id="filesystemBtn">Try Filesystem Link</button>
+<button id="blobBtn">Generate Blob URL</button>
+
+<h2>Result:</h2>
+<textarea id="output" readonly></textarea>
+<br>
+<a id="openLink" href="#" target="_blank">Open Link</a>
+
+<script>
+const fileInput = document.getElementById('fileLink');
+const output = document.getElementById('output');
+const openLink = document.getElementById('openLink');
+
+// --- Filesystem attempt ---
+document.getElementById('filesystemBtn').onclick = async () => {
+  try {
+    // Prompt user to pick the same file (browser security restriction)
+    const [fileHandle] = await window.showOpenFilePicker();
+    const file = await fileHandle.getFile();
+    const url = URL.createObjectURL(file);
+    output.value = `Filesystem-like URL:\n${url}`;
+    openLink.href = url;
+    openLink.textContent = "Open File";
+  } catch (err) {
+    output.value = "Failed to generate filesystem URL: " + err.message;
+  }
+};
+
+// --- Blob URL generator ---
+document.getElementById('blobBtn').onclick = async () => {
+  try {
+    const [fileHandle] = await window.showOpenFilePicker();
+    const file = await fileHandle.getFile();
+    const blobURL = URL.createObjectURL(file);
+    output.value = `Blob URL:\n${blobURL}`;
+    openLink.href = blobURL;
+    openLink.textContent = "Open Blob";
+  } catch (err) {
+    output.value = "Failed to generate blob URL: " + err.message;
+  }
+};
+</script>
+</body>
+</html>
